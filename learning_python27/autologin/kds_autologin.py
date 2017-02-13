@@ -1,6 +1,6 @@
 # -*- coding:utf-8 -*-
 #!/usr/bin/python    
-  
+
 import HTMLParser   
 import urlparse   
 import urllib   
@@ -9,7 +9,11 @@ import cookielib
 import string   
 import re   
 import json
-   
+
+#从终端输入用户名和密码
+user_name = raw_input("input username:\n")
+password = raw_input("input password:\n")
+
 #登录的主页面   
 hosturl = "https://i.kdslife.com/index.php"   
 #post数据接收和处理的页面（我们要向这个页面发送我们构造的Post数据）   
@@ -28,10 +32,10 @@ h = urllib2.urlopen(hosturl)
 headers = {'User-Agent' : 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:51.0) Gecko/20100101 Firefox/51.0',   
            'Referer' : '111'}   
 #构造Post数据，他也是从抓大的包里分析得出的。   
-postData = {'c' : 'login',   
+postData = {'c' : 'login',  
             'm' : 'do_login',   
-            'user_name' : 'hayabusa', 
-            'password' : 'ferrari'
+            'user_name' : user_name, 
+            'password' : password
             }   
    
 #需要给Post数据编码 
@@ -42,12 +46,9 @@ request = urllib2.Request(posturl, postData, headers)
 print request   
 response = urllib2.urlopen(request)   
 text = response.read()   
+
 #print text
 output = json.loads(text)
-#print 'status',output['status']
-#print 'msg',output['msg']
-#print 'data',output['data']
-
-print ("status %010s"%(output['status']))
-print ("msg %010s"%(output['msg']))
-print ("data %010s"%(output['data']))
+print ("%15s%-35s"%('status: ', output['status']))
+print ("%15s%-35s"%('returned msg: ', output['msg']))
+print ("%15s%-35s"%('returned data: ', output['data']))

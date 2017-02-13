@@ -9,10 +9,11 @@ import cookielib
 import string   
 import re   
 import json
+import getpass
 
 #从终端输入用户名和密码
 user_name = raw_input("input username:\n")
-password = raw_input("input password:\n")
+password = getpass.getpass('password: ')
 
 #登录的主页面   
 hosturl = "https://i.kdslife.com/index.php"   

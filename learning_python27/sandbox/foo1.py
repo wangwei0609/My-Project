@@ -1,7 +1,7 @@
 # -*- coding:utf-8 -*-
 #!/usr/bin/python    
 
-import HTMLParser
+import HTML.Parser
 import urlparse   
 import urllib   
 import urllib2   
@@ -29,9 +29,9 @@ postData = {'c' : 'login',
             'm' : 'do_login',   
             'user_name' : user_name, 
             'password' : password
-            } 
+            } 	
 
-class AutoLoginController:
+class AutoLoginController(object):
      
     def __init__(self, hosturl, posturl, postData, headers):
         cj = cookielib.LWPCookieJar()   
@@ -66,3 +66,4 @@ class AutoLoginController:
         urllib2.urlopen(hosturl)
 
 KDSAutoLogin = AutoLoginController(hosturl,posturl, postData, headers)
+KDSAutoLogin
